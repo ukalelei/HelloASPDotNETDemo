@@ -14,19 +14,25 @@ namespace HelloASPDotNET.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string html = "<form method='post' action='/hello'>" +
+            //html is moved to index.cshtml the template is called with View()
+            /*string html = "<form method='post' action='/hello'>" +
                 "<input type='text' name='name' />" +
                 "<input type='submit' value='Greet Me!' />" +
-                "</form>";
+                "</form>"; 
 
-            return Content(html, "text/html");
+            return Content(html, "text/html");*/
+
+            return View(); //finds template that's asscoiate with HelloConstroller
         }
 
         [HttpPost]
         [Route("/hello")]
         public IActionResult Welcome(string name = "World")
         {
-            return Content("<h1>Welcome to my app, " + name + "!</h1>", "text/html");
+            // return Content("<h1>Welcome to my app, " + name + "!</h1>", "text/html");
+
+            ViewBag.person = name; //value of name will be filled when someone enters a name 
+            return View();
         }
     }
 }
